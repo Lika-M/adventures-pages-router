@@ -1,0 +1,13 @@
+.detail h1, .detail address{
+    text-align: center;
+}
+
+.content {
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.detail img {
+    margin: 0 auto;
+    width: 100%;
+}

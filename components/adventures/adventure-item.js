@@ -1,6 +1,14 @@
+import { useRouter } from 'next/router';
+
 import classes from './adventure-item.module.css';
 
-export default function AdventureItem({title, image, address}) {
+export default function AdventureItem({ id, title, image, address }) {
+    const router = useRouter();
+
+    function showDetail() {
+        router.push(`/${id}`);
+    }
+
     return (
         <li className={classes.item}>
             <div className={classes.card}>
@@ -12,7 +20,7 @@ export default function AdventureItem({title, image, address}) {
                     <address>{address}</address>
                 </div>
                 <div className={classes.actions}>
-                    <button>Show Details</button>
+                    <button onClick={showDetail}>Show Details</button>
                 </div>
             </div>
         </li>
