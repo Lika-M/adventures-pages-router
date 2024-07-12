@@ -17,10 +17,20 @@ export const DUMMY_DATA = [
   },
 ]
 
-export default function Home() {
+export default function Home({adventures}) {
   return (
     <>
-      <AdventuresList adventures={DUMMY_DATA} />
+      <AdventuresList adventures={adventures} />
     </>
   );
+}
+
+export async function getStaticProps(){
+  // fetch data from an API
+  return {
+    props: {
+      adventures: DUMMY_DATA
+    },
+    revalidate: 3600
+  }
 }
