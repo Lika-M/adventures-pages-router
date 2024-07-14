@@ -21,7 +21,9 @@ export default function NewAdventureForm({ onAddAdventure }) {
             image: enteredImage,
             address: enteredAddress,
             description: enteredDescription,
+            createdAt: new Date().toISOString()
         };
+        console.log(adventure)
 
         onAddAdventure(adventure);
     }
