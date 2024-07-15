@@ -9,7 +9,7 @@ export default function Details({ adventure, error }) {
     return (
         <>
             <Head>
-                <title>{adventure ? 'Lovely place' : 'Loading...'}</title>
+                <title>{adventure ? adventure.title : 'Loading...'}</title>
                 <meta name="description" content={adventure ? adventure.description : 'Loading...'} />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/world-map.ico" />

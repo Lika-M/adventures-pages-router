@@ -10,10 +10,10 @@ export default function MainNavigation() {
             <nav>
                 <ul>
                     <li>
-                        <Link href='/'>All Impressive places</Link>
+                        <Link href='/'>All Impressive Places</Link>
                     </li>
                     <li>
-                        <Link href='/new-adventure'>New destination</Link>
+                        <Link href='/new-adventure'>Add Journey</Link>
                     </li>
                 </ul>
             </nav>
