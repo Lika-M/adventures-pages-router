@@ -1,3 +1,5 @@
+import Head from "next/head.js";
+
 import AdventuresList from "@/components/adventures/adventures-list.js";
 import { connectToDB } from "@/db-lib/db.js";
 
@@ -8,6 +10,12 @@ export default function Home({ adventures, error }) {
 
   return (
     <>
+     <Head>
+        <title>Adventures</title>
+        <meta name="description" content="Amazing adventures all over the World." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/world-map.ico" />
+      </Head>
       <AdventuresList adventures={adventures} />
     </>
   );

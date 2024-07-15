@@ -1,26 +1,31 @@
 import { ObjectId } from 'mongodb';
+import Head from 'next/head.js';
 
 import AdventureDetail from "@/components/adventures/adventure-detail.js";
 import { connectToDB } from "@/db-lib/db.js";
 
-export default function Details({ adventure, loading, error }) {
-    if (loading) {
-        return <p>Loading...</p>;
-    }
+export default function Details({ adventure, error }) {
 
-    if (error) {
-        return <p>Adventure not found!</p>;
-    }
-
-    return <AdventureDetail {...adventure} />;
+    return (
+        <>
+            <Head>
+                <title>{adventure ? 'Lovely place' : 'Loading...'}</title>
+                <meta name="description" content={adventure ? adventure.description : 'Loading...'} />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/world-map.ico" />
+            </Head>
+            {error && <p>Adventure not found!</p>}
+            {!error && !adventure && <p>Loading...</p>}
+            {!error && adventure && <AdventureDetail {...adventure} />}
+        </>
+    );
 }
 
 export async function getStaticProps(context) {
     const adventureId = context.params.adventureId;
 
     let client;
-    let adventure = {};
-    let loading = true;
+    let adventure = null;
     let error = null;
 
     try {
@@ -29,7 +34,6 @@ export async function getStaticProps(context) {
         return {
             props: {
                 adventure,
-                loading: false,
                 error: { message: 'Could not connect to database.' }
             },
             revalidate: 3600,
@@ -39,7 +43,7 @@ export async function getStaticProps(context) {
     try {
         const db = client.db('adventures');
         const collection = db.collection('destinations');
-        const objectId =  ObjectId.createFromHexString(adventureId);
+        const objectId = ObjectId.createFromHexString(adventureId);
         adventure = await collection.findOne({ _id: objectId });
 
         if (!adventure) {
@@ -54,8 +58,6 @@ export async function getStaticProps(context) {
             description: adventure.description
         }
 
-        loading = false;
-
     } catch (err) {
         error = { message: 'Could not fetch adventure data.' };
     } finally {
@@ -67,7 +69,6 @@ export async function getStaticProps(context) {
     return {
         props: {
             adventure,
-            loading,
             error
         },
         revalidate: 300
