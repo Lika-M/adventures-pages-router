@@ -8,7 +8,8 @@
     padding: 0 10%;
 }
 
-.logo {
+.logo a {
+    text-decoration: none;
     font-size: 2rem;
     color: white;
     font-weight: bold;
@@ -26,7 +27,7 @@
     margin-left: 3rem;
 }
 
-.header a {
+.header ul a {
     text-decoration: none;
     font-size: 1.5rem;
     color: #fcb8d2;

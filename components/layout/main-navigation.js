@@ -6,11 +6,15 @@ export default function MainNavigation() {
 
     return (
         <header className={classes.header}>
-            <div className={classes.logo}>Adventures</div>
+            <div className={classes.logo}>
+                <Link href='/'>
+                    Adventures
+                </Link>
+            </div>
             <nav>
                 <ul>
                     <li>
-                        <Link href='/'>All Impressive Places</Link>
+                        <Link href='/adventures'>All Impressive Places</Link>
                     </li>
                     <li>
                         <Link href='/new-adventure'>Add Journey</Link>
