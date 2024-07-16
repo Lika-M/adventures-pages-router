@@ -6,7 +6,7 @@ export default function AdventureItem({ id, title, image, address }) {
     const router = useRouter();
 
     function showDetail() {
-        router.push(`/${id}`);
+        router.push(`adventures/${id}`);
     }
 
     return (
