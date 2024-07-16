@@ -19,6 +19,9 @@ export default function MainNavigation() {
                     <li>
                         <Link href='/new-adventure'>Add Journey</Link>
                     </li>
+                    <li>
+                        <Link href='/auth'>Login</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
