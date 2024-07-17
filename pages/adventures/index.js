@@ -1,20 +1,27 @@
 import Head from "next/head.js";
+import { useRouter } from "next/router.js";
 
 import AdventuresList from "@/components/adventures/adventures-list.js";
 import { connectToDB } from "@/db-lib/db.js";
 
 export default function Adventures({ adventures, error }) {
+  const router = useRouter();
+  if (router.isFallback) {
+    //TODO add spinner
+    return <p>Loading...</p>
+  }
+
   if (error) {
     return <p>{error.message}</p>;
   }
 
   return (
     <>
-     <Head>
+      <Head>
         <title>Adventures</title>
         <meta name="description" content="Amazing adventures all over the World." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <link rel="icon" href="world-map.ico" /> */}
+        <link rel="icon" href="world-map.ico" />
       </Head>
       <AdventuresList adventures={adventures} />
     </>
@@ -34,7 +41,7 @@ export async function getStaticProps() {
         adventures: [],
         error: { message: 'Could not connect to database.' }
       },
-      revalidate: 3600,
+      revalidate: 60,
     };
   }
 
@@ -48,7 +55,7 @@ export async function getStaticProps() {
       image: adventure.image,
       address: adventure.address
     }));
-    
+
     console.log(adventures.id)
   } catch (error) {
     return {
@@ -56,7 +63,7 @@ export async function getStaticProps() {
         adventures: [],
         error: { message: 'Could not fetch data.' }
       },
-      revalidate: 3600,
+      revalidate: 60,
     };
   } finally {
     if (client) {
@@ -68,6 +75,6 @@ export async function getStaticProps() {
     props: {
       adventures
     },
-    revalidate: 3600
+    revalidate: 60
   };
 }

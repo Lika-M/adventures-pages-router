@@ -1,10 +1,16 @@
 import { ObjectId } from 'mongodb';
 import Head from 'next/head.js';
+import { useRouter } from 'next/router';
 
 import AdventureDetail from "@/components/adventures/adventure-detail.js";
 import { connectToDB } from "@/db-lib/db.js";
 
 export default function Details({ adventure, error }) {
+    const router = useRouter();
+    if (router.isFallback) {
+        //TODO add spinner
+        return <p>Loading...</p>
+    }
 
     return (
         <>
@@ -15,7 +21,6 @@ export default function Details({ adventure, error }) {
                 <link rel="icon" href="/world-map.ico" />
             </Head>
             {error && <p>Adventure not found!</p>}
-            {!error && !adventure && <p>Loading...</p>}
             {!error && adventure && <AdventureDetail {...adventure} />}
         </>
     );
@@ -36,7 +41,7 @@ export async function getStaticProps(context) {
                 adventure,
                 error: { message: 'Could not connect to database.' }
             },
-            revalidate: 3600,
+            revalidate: 60,
         };
     }
 
@@ -71,7 +76,7 @@ export async function getStaticProps(context) {
             adventure,
             error
         },
-        revalidate: 300
+        revalidate: 60
     }
 }
 
@@ -83,7 +88,7 @@ export async function getStaticPaths() {
         client = await connectToDB();
     } catch (error) {
         return {
-            fallback: false,
+            fallback: 'blocking',
             paths: [],
         };
     }
@@ -95,7 +100,7 @@ export async function getStaticPaths() {
 
     } catch (error) {
         return {
-            fallback: false,
+            fallback: 'blocking',
             paths: []
         }
     } finally {
@@ -111,7 +116,7 @@ export async function getStaticPaths() {
     }))
 
     return {
-        fallback: false,
+        fallback: 'blocking',
         paths
-    }
+    };
 }
