@@ -11,23 +11,25 @@
   margin: 0;
   height: 400px;
   overflow: hidden;
-}
-
-.brands-carousel>div {
-  width: 100%;
-}
-
-.brands-carousel>picture {
-  width: 100%;
-  position: absolute;
-  top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.brand-picture {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* Създаване на контейнер с 100% височина */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation: carousel 15s linear infinite;
   transform: translateX(100%);
 }
 
-.brands-carousel>picture:nth-child(1) {
+.brands-carousel>.brand-picture:nth-child(1) {
   animation-name: first-picture, carousel;
   animation-duration: 15s;
   animation-iteration-count: 1, infinite;
@@ -35,11 +37,11 @@
   transform: translateX(0%);
 }
 
-.brands-carousel>picture:nth-child(2) {
+.brands-carousel>.brand-picture:nth-child(2) {
   animation-delay: Calc(15s * .33);
 }
 
-.brands-carousel>picture:nth-child(3) {
+.brands-carousel>.brand-picture:nth-child(3) {
   animation-delay: Calc(15s * .66);
 }
 
@@ -107,38 +109,36 @@
   }
 }
 
-.brands-carousel>picture:last-child {
+.brands-carousel>.brand-picture:last-child {
   display: none;
 }
 
-/* @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .brands-container {
     max-width: 100vw;
-    height: 50vh;
   }
 
-  .brands-carousel>picture {
-    display: block;
+  .brands-carousel>.brand-picture {
     animation: carousel-responsive 20s linear infinite;
   }
 
-  .brands-carousel>picture:nth-child(1) {
+  .brands-carousel>.brand-picture:nth-child(1) {
     animation-name: first-picture-responsive, carousel-responsive;
     animation-duration: 20s;
     animation-iteration-count: 1, infinite;
     animation-delay: 0s, 20s;
   }
 
-  .brands-carousel>picture:nth-child(2) {
+  .brands-carousel>.brand-picture:nth-child(2) {
     animation-delay: Calc(20s * .25);
   }
 
-  .brands-carousel>picture:nth-child(3) {
+  .brands-carousel>.brand-picture:nth-child(3) {
     animation-delay: Calc(20s * .50);
   }
 
-  .brands-carousel>picture:nth-child(4) {
+  .brands-carousel>.brand-picture:nth-child(4) {
     animation-delay: Calc(20s * .75);
     display: block;
   }
-} */
+}

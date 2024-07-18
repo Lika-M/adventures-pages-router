@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['dynamic-media-cdn.tripadvisor.com', 's2-casavogue.glbimg.com'],
+    domains: ['picsum.photos'],
   },
 };
 
