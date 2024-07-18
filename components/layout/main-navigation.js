@@ -1,8 +1,15 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
+import { FaBars, FaTimes } from 'react-icons/fa';
 import classes from './main-navigation.module.css';
 
 export default function MainNavigation() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen(!mobileMenuOpen);
+    };
 
     return (
         <header className={classes.header}>
@@ -11,7 +18,12 @@ export default function MainNavigation() {
                     Adventures
                 </Link>
             </div>
-            <nav>
+            <nav className={mobileMenuOpen ? classes['open-nav'] : classes['close-nav']}>
+                <div className={classes.menuToggle} onClick={toggleMobileMenu}>
+                    <div className={classes.toggleIcon}>
+                        {!mobileMenuOpen ? <FaBars/> : <FaTimes/> }
+                    </div>
+                </div>
                 <ul>
                     <li>
                         <Link href='/adventures'>All Impressive Places</Link>
