@@ -19,8 +19,8 @@ export default function AdventureItem({ id, title, image, address }) {
                         alt={title}
                         width={700}
                         height={300}
-                        layout="responsive"
                         sizes="(max-width: 700px) 100vw, 700px"
+                        priority={true}
                     />
                 </div>
                 <div className={classes.description}>

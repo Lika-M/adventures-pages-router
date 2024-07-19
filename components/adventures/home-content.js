@@ -20,32 +20,36 @@ export default function HomeContent() {
                         <Image
                             src="https://picsum.photos/600/600?random=1"
                             alt="Beautiful place 1"
-                            layout="fill"
-                            objectFit="cover"
+                            priority
+                            fill
+                            style={{ objectFit: 'cover' }}
                         />
                     </div>
                     <div className={classes["brand-picture"]}>
                         <Image
                             src="https://picsum.photos/600/600?random=2"
                             alt="Beautiful place 2"
-                            layout="fill"
-                            objectFit="cover"
+                            priority
+                            fill
+                            style={{ objectFit: 'cover' }}
                         />
                     </div>
                     <div className={classes["brand-picture"]}>
                         <Image
                             src="https://picsum.photos/600/600?random=3"
                             alt="Beautiful place 3"
-                            layout="fill"
-                            objectFit="cover"
+                            priority
+                            fill
+                            style={{ objectFit: 'cover' }}
                         />
                     </div>
                     <div className={classes["brand-picture"]}>
                         <Image
                             src="https://picsum.photos/600/600?random=4"
                             alt="Beautiful place 4"
-                            layout="fill"
-                            objectFit="cover"
+                            priority
+                            fill
+                            style={{ objectFit: 'cover' }}
                         />
                     </div>
                 </div>

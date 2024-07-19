@@ -11,7 +11,6 @@ export default function AdventureDetail({ title, image, address, description }) 
                 width={700}
                 height={475}
                 className={classes.img}
-                layout="responsive"
                 sizes="(max-width: 700px) 100vw, 700px"
             />
             <div className={classes.content}>
