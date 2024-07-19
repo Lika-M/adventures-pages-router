@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import { connectToDB, insertDocument } from "@/db-lib/db.js";
 
 async function handler(req, res) {
@@ -14,11 +16,41 @@ async function handler(req, res) {
         return;
     }
 
-  const userData = {email, password}
-  console.log(userData)
+    let client;
+    try {
+        client = await connectToDB();
+    } catch (error) {
+        res.status(500).json({ message: 'Connection to the DB failed.' });
+        return;
+    }
 
+    //TODO check if user exists
+
+    let hashedPassword;
+    try {
+        hashedPassword = await bcrypt.hash(password, 12);
+    } catch (error) {
+        res.status(500).json({ message: 'Password hashing failed.' });
+        return;
+    }
+
+    const userData = {
+        email,
+        password: hashedPassword
+    };
+
+    try {
+        const result = await insertDocument(client, 'users', userData);
+        res.status(201).json({ message: 'User created.', data: result });
+    } catch (error) {
+        res.status(500).json({message: 'User registration failed.'});
+        return;
+    } finally {
+        if(client){
+           await client.close();
+        }
+    }
 
 }
-
 
 export default handler;
