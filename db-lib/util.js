@@ -10,8 +10,26 @@ export async function createAdventure(adventureData) {
     const data = await response.json();
 
     if (!response.ok) {
-        throw new Error({ message: 'Error' })
+        throw new Error({ message: 'Unfortunately something went wrong, please try again later.' })
     }
     console.log(data)
+    return data;
+}
+
+export async function createUser(userData) {
+    const response = await fetch('/api/register', {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+        throw new Error({message: 'User registration failed'})
+    }
+
     return data;
 }

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 
+import { createUser } from '@/db-lib/util.js';
 import classes from './auth-form.module.css';
 
 function AuthForm() {
@@ -8,6 +9,26 @@ function AuthForm() {
     const inputEmail = useRef();
     const inputPassword = useRef();
 
+    async function signHandler(event) {
+        event.preventDefault();
+
+        const user = {
+            email: inputEmail.current.value,
+            password: inputPassword.current.value,
+            createdAt: new Date().toISOString()
+        }
+
+        if (!isLogin) {
+            try {
+                const result = await createUser(user);
+            } catch (error) {
+                alert(error.message);
+            }
+        } else {
+            console.log('login')
+        }
+    }
+
     function toggleAction() {
         setIsLogin(!isLogin)
     }
@@ -15,7 +36,7 @@ function AuthForm() {
     return (
         <section className={classes.auth}>
             <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-            <form>
+            <form onSubmit={signHandler}>
                 <div className={classes.control}>
                     <label htmlFor='email'>Enter your email</label>
                     <input type='email' id='email' required ref={inputEmail} />
