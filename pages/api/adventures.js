@@ -25,7 +25,7 @@ async function handler(req, res) {
     }
 
     try {
-        const result = await insertDocument(client, adventure);
+        const result = await insertDocument(client, 'destinations', adventure);
         res.status(201).json({ message: 'Created new destination successfully', result })
     } catch (error) {
         res.status(500).json({ message: error.message })

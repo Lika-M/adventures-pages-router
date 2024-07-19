@@ -15,9 +15,10 @@ export async function connectToDB() {
     return client;
 }
 
-export async function insertDocument(client, document) {
+export async function insertDocument(client, collectionName, document) {
     const db = client.db('adventures');
-    const collection = await db.collection('destinations');
+    const collection = await db.collection(collectionName);
     const result = await collection.insertOne(document);
     return result;
 }
+
