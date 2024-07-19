@@ -2,8 +2,30 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['dynamic-media-cdn.tripadvisor.com', 's2-casavogue.glbimg.com', 'picsum.photos'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 's2-casavogue.glbimg.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dynamic-media-cdn.tripadvisor.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
 export default nextConfig;
+
+
+
