@@ -20,7 +20,6 @@ export default function AdventureItem({ id, title, image, address }) {
                         width={700}
                         height={300}
                         sizes="(max-width: 700px) 100vw, 700px"
-                        priority={true}
                     />
                 </div>
                 <div className={classes.description}>

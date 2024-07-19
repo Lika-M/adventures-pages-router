@@ -22,6 +22,7 @@ export default function HomeContent() {
                             alt="Beautiful place 1"
                             priority
                             fill
+                            sizes="(max-width: 768px) 100vw, 100vw"
                             style={{ objectFit: 'cover' }}
                         />
                     </div>
@@ -31,6 +32,7 @@ export default function HomeContent() {
                             alt="Beautiful place 2"
                             priority
                             fill
+                            sizes="(max-width: 768px) 100vw, 100vw"
                             style={{ objectFit: 'cover' }}
                         />
                     </div>
@@ -40,6 +42,7 @@ export default function HomeContent() {
                             alt="Beautiful place 3"
                             priority
                             fill
+                            sizes="(max-width: 768px) 100vw, 100vw"
                             style={{ objectFit: 'cover' }}
                         />
                     </div>
@@ -49,6 +52,7 @@ export default function HomeContent() {
                             alt="Beautiful place 4"
                             priority
                             fill
+                            sizes="(max-width: 768px) 100vw, 100vw"
                             style={{ objectFit: 'cover' }}
                         />
                     </div>
