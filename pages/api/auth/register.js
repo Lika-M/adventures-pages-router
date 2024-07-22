@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import { connectToDB, insertDocument } from "@/db-lib/db.js";
+import { connectToDB, insertDocument, checkUserExists } from "@/db-lib/db.js";
 
 async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -24,9 +24,20 @@ async function handler(req, res) {
         return;
     }
 
-    //TODO check if user exists
+    try {
+        const existingUser = await checkUserExists(client, 'users',email);
+        if (existingUser) {
+            res.status(422).json({ message: 'User registered already.' });
+            return;
+        }
+    } catch (error) {
+        res.status(500).json({ message: "DB connection failed." });
+        await client.close();
+        return;
+    }
 
     let hashedPassword;
+
     try {
         hashedPassword = await bcrypt.hash(password, 12);
     } catch (error) {

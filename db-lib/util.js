@@ -17,7 +17,7 @@ export async function createAdventure(adventureData) {
 }
 
 export async function createUser(userData) {
-    const response = await fetch('/api/register', {
+    const response = await fetch('/api/auth/register', {
         method: "POST",
         body: JSON.stringify(userData),
         headers: {
