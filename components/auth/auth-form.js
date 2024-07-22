@@ -15,22 +15,19 @@ function AuthForm() {
     async function signHandler(event) {
         event.preventDefault();
 
-        // TODO validation
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             setErrorMessage(state => ({
                 ...state,
-                email: 'Enter a valid email address'
+                email: 'Enter a valid email address.'
             }));
+            return;
         }
-        
+
         if (!password || password.trim().length < 6) {
             setErrorMessage(state => ({
                 ...state,
-                password: 'Password must be at least 6 characters long'
+                password: 'Password must be at least 6 characters long.'
             }));
-        }
-
-        if (errorMessage.some(x => x === '')) {
             return;
         }
 
@@ -38,7 +35,9 @@ function AuthForm() {
             email,
             password,
             createdAt: new Date().toISOString()
-        }
+        };
+
+        setIsLoading(true);
 
         try {
             if (isLogin) {
@@ -50,8 +49,10 @@ function AuthForm() {
                 router.replace('/adventures');
             }
         } catch (error) {
-            //TODO add 404 page
-            // router.push('/error)
+            setErrorMessage(state => ({
+                ...state,
+                general: 'An error occurred. Please try again later.'
+            }));
         } finally {
             setIsLoading(false);
             setEmail('');
@@ -60,7 +61,20 @@ function AuthForm() {
     }
 
     function toggleAction() {
-        setIsLogin(!isLogin)
+        setIsLogin(!isLogin);
+        setEmail('');
+        setPassword('');
+        setErrorMessage({ email: '', password: '' });
+    }
+
+    function handleEmailFocus() {
+        setEmail('');
+        setErrorMessage(state => ({ ...state, email: '' }));
+    }
+
+    function handlePasswordFocus() {
+        setPassword('');
+        setErrorMessage(state => ({ ...state, password: '' }));
     }
 
     return (
@@ -75,7 +89,9 @@ function AuthForm() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        onFocus={handleEmailFocus}
                     />
+                    {errorMessage.email && <p className={classes.error}>{errorMessage.email}</p>}
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='password'>Enter your password</label>
@@ -85,11 +101,13 @@ function AuthForm() {
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onFocus={handlePasswordFocus}
                     />
+                    {errorMessage.password && <p className={classes.error}>{errorMessage.password}</p>}
                 </div>
                 <div className={classes.actions}>
                     <button type='submit' disabled={isLoading}>
-                        {isLogin ? 'Login' : 'Create Account'}
+                        {isLoading ? 'Loading...' : isLogin ? 'Login' : 'Create Account'}
                     </button>
                 </div>
                 <div className={classes.toggle}>

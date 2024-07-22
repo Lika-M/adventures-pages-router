@@ -21,6 +21,7 @@
 
 .control {
     margin-bottom: 2rem;
+    position: relative;
 }
 
 .control label {
@@ -39,6 +40,16 @@
     width: 100%;
     text-align: left;
     padding: 0.25rem;
+}
+
+.control p {
+    width: 100%;
+    font-size: 13px;
+    color: white;
+    position: absolute;
+    transform: translate(50px, 50px);
+    top: 0px;
+    left: -50px;
 }
 
 .actions {
