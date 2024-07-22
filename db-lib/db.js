@@ -17,8 +17,15 @@ export async function connectToDB() {
 
 export async function insertDocument(client, collectionName, document) {
     const db = client.db('adventures');
-    const collection = await db.collection(collectionName);
+    const collection = db.collection(collectionName);
     const result = await collection.insertOne(document);
+    return result;
+}
+
+export async function checkUserExists(client, collectionName, email) {
+    const db = client.db('adventures');
+    const collection = db.collection(collectionName);
+    const result = await collection.findOne({ email: email });
     return result;
 }
 
