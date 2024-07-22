@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router.js';
+import { signIn } from 'next-auth/react';
 
 import { createUser } from '@/db-lib/util.js';
 import classes from './auth-form.module.css';
@@ -39,25 +40,44 @@ function AuthForm() {
 
         setIsLoading(true);
 
-        try {
-            if (isLogin) {
-                console.log('login');
-                // check user credentials
-                // router.replace('/adventures');
-            } else {
+
+        if (isLogin) {
+            try {
+                const sign = await signIn('credentials', {
+                    email: email,
+                    password: password,
+                    redirect: false
+                });
+
+                if (sign.error) {
+                    throw new Error(sign.error)
+                }
+
+                if (!sign.error) {
+                    router.replace('/adventures');
+                }
+            } catch (error) {
+                //TODO add modal
+                alert(error.message);
+            }
+
+        } else {
+            try {
                 await createUser(user);
                 router.replace('/adventures');
+
+            } catch (error) {
+                if (error.message === 'User registration failed.') {
+                    console.log(error.message);
+                    // router.replace('/auth/error');
+                    // something went wrong message
+                }
+
+                alert(error.message);
             }
-        } catch (error) {
-            setErrorMessage(state => ({
-                ...state,
-                general: 'An error occurred. Please try again later.'
-            }));
-        } finally {
-            setIsLoading(false);
-            setEmail('');
-            setPassword('');
         }
+
+        setIsLoading(false);
     }
 
     function toggleAction() {

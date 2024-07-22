@@ -27,8 +27,17 @@ export async function createUser(userData) {
 
     const data = await response.json();
 
-    if(!response.ok){
-        throw new Error({message: 'User registration failed'})
+
+    if (!response.ok) {
+        if (response.status === 422) {
+            throw new Error('Registration with this email already exists.');
+        }
+
+        if (response.status === 401) {
+            throw new Error('Unauthorized!');
+        }
+
+        throw new Error('User registration failed.');
     }
 
     return data;
