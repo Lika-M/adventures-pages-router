@@ -78,6 +78,8 @@ function AuthForm() {
         }
 
         setIsLoading(false);
+        setEmail('');
+        setPassword('');
     }
 
     function toggleAction() {
