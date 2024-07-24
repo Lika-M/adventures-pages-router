@@ -1,4 +1,5 @@
 .header {
+    font-family: inherit;
     width: 100%;
     height: 5rem;
     display: flex;
@@ -25,13 +26,17 @@
 }
 
 .header li {
-    margin-left: 3rem;
+    margin: 1rem;
 }
 
 .header ul a {
     text-decoration: none;
     font-size: 1.3rem;
     color: #fcb8d2;
+}
+
+.header ul li:last-child {
+    width: 80px;
 }
 
 .header a:hover,
@@ -44,12 +49,51 @@
     display: none;
 }
 
+.open-nav button,
+.close-nav button {
+    font-size: 1.3rem;
+    color: #fcb8d2;
+    background-color: #77002e;
+    border: none;
+    cursor: pointer;
+}
+
+.new-adventure {
+    animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.auth-link {
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 768px) {
 
     .header {
         position: relative;
     }
-    
+
     .open-nav ul {
         width: 12rem;
         flex-direction: column;
@@ -67,6 +111,7 @@
     .open-nav ul {
         transform: translateY(0);
     }
+
     .open-nav ul li {
         padding: 0.5rem 1rem;
     }
@@ -78,6 +123,12 @@
 
     .close-nav ul {
         display: none;
+    }
+
+    .open-nav button,
+    .close-nav button {
+        font-size: 1rem;
+        color: white;
     }
 
     .header li {
