@@ -7,9 +7,9 @@ import { createAdventure } from "@/db-lib/util.js";
 export default function NewAdventure() {
   const router = useRouter();
 
-  function addHandler(data) {
-    createAdventure(data);
-    router.push('/')
+ async  function addHandler(data) {
+    await createAdventure(data);
+    router.push('/adventures')
   }
 
   return (

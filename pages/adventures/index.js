@@ -48,7 +48,7 @@ export async function getStaticProps() {
   try {
     const db = client.db('adventures');
     const collection = db.collection('destinations');
-    adventures = await collection.find().toArray();
+    adventures = await collection.find().sort({createdAt: -1}).toArray();
     adventures = adventures.map(adventure => ({
       id: adventure._id.toString(),
       title: adventure.title,
@@ -56,7 +56,6 @@ export async function getStaticProps() {
       address: adventure.address
     }));
 
-    console.log(adventures.id)
   } catch (error) {
     return {
       props: {
