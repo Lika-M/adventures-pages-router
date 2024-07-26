@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react';
+
+import Loader from '../ui/loader.js';
 import classes from './new-adventure-form.module.css';
 
 export default function NewAdventureForm({ onAddAdventure }) {
@@ -138,8 +140,7 @@ export default function NewAdventureForm({ onAddAdventure }) {
                     {error.description && <p className={classes.error}>{error.description}</p>}
                 </div>
                 <div className={classes.actions}>
-                    {/* TODO add loader */}
-                    {isImageUploading && <span className={classes.loader}>Uploading image...</span>}
+                <Loader isUploading={isImageUploading}/>
                     <button disabled={isImageUploading || isFormSubmitting}>Add Adventure</button>
                 </div>
             </form>

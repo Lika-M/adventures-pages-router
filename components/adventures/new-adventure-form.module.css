@@ -33,6 +33,10 @@
 .actions {
     margin-top: 1rem;
     text-align: right;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .actions button {
@@ -46,16 +50,16 @@
     font-weight: bold;
 }
 
-.actions button[disabled] {
+.actions button:hover{
+    background-color: #a50e48;
+    border-color: #a50e48;
+}
+
+.actions button[disabled],
+.actions button[disabled]:hover {
     background-color: #764558;
     color: #ae99a1;
     border: 1px solid #764558;
-}
-
-.actions button:hover,
-.actions button:active {
-    background-color: #a50e48;
-    border-color: #a50e48;
 }
 
 .error {
@@ -82,13 +86,6 @@
     }
 }
 
-.loader {
-    display: inline-block;
-    color: #a50e48;
-    margin-right: 3rem;
-    animation: pulse 1s infinite;
-}
-
 @keyframes pulse {
     0% {
         opacity: 1;
@@ -100,5 +97,17 @@
 
     100% {
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 550px){
+
+    .control textarea {
+        margin-bottom: 0;
+    }
+    .actions {
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 0;
     }
 }
