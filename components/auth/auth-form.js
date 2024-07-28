@@ -54,7 +54,7 @@ function AuthForm() {
                 }
 
                 if (!sign.error) {
-                    router.replace('/adventures');
+                    router.replace('/');
                 }
             } catch (error) {
                 //TODO add modal

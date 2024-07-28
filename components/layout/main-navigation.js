@@ -1,13 +1,14 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
+import Image from 'next/image';
 import { FaBars, FaTimes } from 'react-icons/fa';
+
+import ActiveLink from '../ui/active-link.js';
 import classes from './main-navigation.module.css';
 
 export default function MainNavigation() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { data: session, status } = useSession();
-    console.log(status);  // loading | authenticated | unauthenticated
 
     const isAuth = status === 'authenticated';
 
@@ -22,9 +23,16 @@ export default function MainNavigation() {
     return (
         <header className={classes.header}>
             <div className={classes.logo}>
-                <Link href='/'>
-                    Adventures
-                </Link>
+                <ActiveLink href='/'>
+                    <h3>Adventures</h3>
+                </ActiveLink>
+                <Image
+                    src='/logo.png'
+                    width={150}
+                    height={120}
+                    quality={75}
+                    priority
+                />
             </div>
             <nav className={`${classes.nav} ${mobileMenuOpen ? classes['open-nav'] : classes['close-nav']}`}>
                 <div className={classes.menuToggle} onClick={toggleMobileMenu}>
@@ -35,18 +43,18 @@ export default function MainNavigation() {
                 <ul>
                     {isAuth &&
                         <li className={classes['new-adventure']}>
-                            <Link href='/new-adventure'>Add Journey</Link>
+                            <ActiveLink href='/new-adventure'>Add Journey</ActiveLink>
                         </li>
                     }
                     <li>
-                        <Link href='/adventures'>All Impressive Places</Link>
+                        <ActiveLink href='/adventures'>All Impressive Places</ActiveLink>
                     </li>
-                    {!isAuth 
+                    {!isAuth
                         ? <li className={classes['auth-link']}>
-                            <Link href='/auth'>Login</Link>
+                            <ActiveLink href='/auth'>Login</ActiveLink>
                         </li>
                         : <li className={classes['auth-link']}>
-                            <button onClick={logoutHandler}>Logout</button>
+                            <button onClick={logoutHandler} className='active'>Logout</button>
                         </li>
                     }
                 </ul>
